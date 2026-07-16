@@ -5,6 +5,8 @@ import { CAMERA } from "../config.js";
 export function createOrbitControls(camera, canvas, { reducedMotion, onInteract }) {
   const controls = new OrbitControls(camera, canvas);
   const home = new THREE.Vector3(...CAMERA.home);
+  const portraitHome = new THREE.Vector3(...CAMERA.portraitHome);
+  const resetDestination = home.clone();
   const center = new THREE.Vector3();
   let lastInteraction = performance.now();
   let returningHome = false;
@@ -43,6 +45,7 @@ export function createOrbitControls(camera, canvas, { reducedMotion, onInteract 
       returningHome = false;
     },
     reset() {
+      resetDestination.copy(camera.aspect < 0.8 ? portraitHome : home);
       returningHome = true;
       controls.autoRotate = false;
       lastInteraction = performance.now();
@@ -51,10 +54,10 @@ export function createOrbitControls(camera, canvas, { reducedMotion, onInteract 
       if (!controls.enabled) return;
 
       if (returningHome) {
-        camera.position.lerp(home, 0.075);
+        camera.position.lerp(resetDestination, 0.075);
         controls.target.lerp(center, 0.075);
-        if (camera.position.distanceTo(home) < 0.03) {
-          camera.position.copy(home);
+        if (camera.position.distanceTo(resetDestination) < 0.03) {
+          camera.position.copy(resetDestination);
           controls.target.copy(center);
           returningHome = false;
         }

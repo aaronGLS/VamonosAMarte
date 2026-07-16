@@ -7,14 +7,12 @@
   overflow: hidden;
   padding: 28px;
   background: radial-gradient(circle at 50% 50%, rgba(21, 14, 45, 0.34), rgba(4, 4, 12, 0.74));
-  transition: opacity 1.25s ease, visibility 1.25s ease, backdrop-filter 1.25s ease;
-  backdrop-filter: blur(8px);
+  transition: opacity 1.05s ease, visibility 1.05s ease;
 }
 
 .intro.is-leaving {
   visibility: hidden;
   opacity: 0;
-  backdrop-filter: blur(0);
   pointer-events: none;
 }
 

@@ -137,8 +137,12 @@ export function createPhraseTexture(text) {
   context.shadowBlur = 6;
   context.fillText(text, width / 2, height / 2);
 
+  const texture = textureFromCanvas(canvas);
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+
   return {
-    texture: textureFromCanvas(canvas),
+    texture,
     aspect: width / height,
   };
 }

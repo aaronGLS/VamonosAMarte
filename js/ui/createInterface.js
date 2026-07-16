@@ -127,9 +127,9 @@ export function createInterface() {
         finaleMessage.setAttribute("aria-hidden", "true");
       }, 5200);
     },
-    showError() {
+    showError(message = "No se pudo crear el universo. Revisa tu conexión.") {
       loadingLabel.classList.remove("is-ready");
-      loadingLabel.textContent = "No se pudo crear el universo. Revisa tu conexión.";
+      loadingLabel.textContent = message;
     },
   };
 

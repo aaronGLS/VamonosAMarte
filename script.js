@@ -9,7 +9,7 @@ import { createHeartConstellation } from "./js/scene/createHeartConstellation.js
 import { createMoons } from "./js/scene/createMoons.js";
 import { createPhrases } from "./js/scene/createPhrases.js";
 import { createReactionParticles } from "./js/scene/createReactionParticles.js";
-import { createRenderer } from "./js/scene/createRenderer.js";
+import { createRenderer, warmUpRenderer } from "./js/scene/createRenderer.js";
 import { createSaturn } from "./js/scene/createSaturn.js";
 import { createShootingStars } from "./js/scene/createShootingStars.js";
 import { createStars } from "./js/scene/createStars.js";
@@ -34,12 +34,16 @@ try {
     document.querySelector("#audio-toggle"),
   );
   let animationFrame = 0;
+  let prepared = false;
   let interaction;
   let currentPhase = "idle";
   let pendingFinale = false;
   let letterOpen = false;
 
-  camera.position.set(...CAMERA.start);
+  const portrait = camera.aspect < 0.8;
+  camera.fov = portrait ? 60 : 48;
+  camera.position.set(...(portrait ? CAMERA.portraitStart : CAMERA.start));
+  camera.updateProjectionMatrix();
   camera.lookAt(center);
 
   const stars = createStars(scene, options);
@@ -147,6 +151,11 @@ try {
 
   function resize() {
     camera.aspect = innerWidth / innerHeight;
+    camera.fov = camera.aspect < 0.8 ? 60 : 48;
+    if (currentPhase === "idle") {
+      camera.position.set(...(camera.aspect < 0.8 ? CAMERA.portraitStart : CAMERA.start));
+      camera.lookAt(center);
+    }
     camera.updateProjectionMatrix();
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
     renderer.setSize(innerWidth, innerHeight);
@@ -157,7 +166,7 @@ try {
     if (document.hidden) {
       cancelAnimationFrame(animationFrame);
       animationFrame = 0;
-    } else if (!animationFrame) {
+    } else if (prepared && !animationFrame) {
       clock.getDelta();
       animate();
     }
@@ -172,8 +181,20 @@ try {
     if (currentPhase === "exploration" && !letterOpen) orbit.reset();
   });
   ui.updateDiscovery(0, EXPERIENCE.discoveryGoal);
-  animate();
-  requestAnimationFrame(() => ui.setReady());
+
+  async function prepareExperience() {
+    try {
+      await warmUpRenderer(renderer, scene, camera);
+      prepared = true;
+      if (!document.hidden) animate();
+      requestAnimationFrame(() => ui.setReady());
+    } catch (error) {
+      console.error("No se pudo preparar WebGL:", error);
+      ui.showError("No se pudo preparar el universo. Recarga la página.");
+    }
+  }
+
+  prepareExperience();
 } catch (error) {
   console.error("No se pudo iniciar la experiencia 3D:", error);
   ui.showError();

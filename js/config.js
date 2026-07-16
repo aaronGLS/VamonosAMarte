@@ -10,6 +10,8 @@ export const COLORS = {
 export const CAMERA = {
   start: [0, 5.5, 34],
   home: [0, 2.8, 19],
+  portraitStart: [0, 5.5, 38],
+  portraitHome: [0, 3, 29],
   minDistance: 10.5,
   maxDistance: 30,
 };
@@ -35,6 +37,14 @@ export const EXPERIENCE = {
     [11, 4, 16.5],
     [2.5, 8.5, 19],
     [0, 2.8, 19],
+  ],
+  portraitTourPositions: [
+    [0, 5.5, 38],
+    [0, 3, 29],
+    [-7, 4.5, 28],
+    [7, 3.5, 27.5],
+    [1.5, 7, 30],
+    [0, 3, 29],
   ],
   tourTargets: [
     [0, 0, 0],

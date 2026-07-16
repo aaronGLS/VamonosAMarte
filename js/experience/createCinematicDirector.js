@@ -11,18 +11,30 @@ export function createCinematicDirector(camera, {
   onTourMoment,
   onFinaleComplete,
 }) {
-  const positions = EXPERIENCE.tourPositions.map((point) => new THREE.Vector3(...point));
   const targets = EXPERIENCE.tourTargets.map((point) => new THREE.Vector3(...point));
-  const positionCurve = new THREE.CatmullRomCurve3(positions, false, "catmullrom", 0.55);
   const targetCurve = new THREE.CatmullRomCurve3(targets, false, "catmullrom", 0.55);
   const finaleCamera = new THREE.Vector3(...EXPERIENCE.finaleCamera);
-  const home = new THREE.Vector3(...CAMERA.home);
-  const start = new THREE.Vector3(...CAMERA.start);
   const center = new THREE.Vector3();
   const finaleOrigin = new THREE.Vector3();
+  let positionCurve;
+  let home = new THREE.Vector3(...CAMERA.home);
+  let start = new THREE.Vector3(...CAMERA.start);
   let phase = "idle";
   let phaseStartedAt = 0;
   let lastMoment = "";
+
+  function configureTourPath() {
+    const portrait = camera.aspect < 0.8;
+    const points = portrait ? EXPERIENCE.portraitTourPositions : EXPERIENCE.tourPositions;
+    positionCurve = new THREE.CatmullRomCurve3(
+      points.map((point) => new THREE.Vector3(...point)),
+      false,
+      "catmullrom",
+      0.55,
+    );
+    start = new THREE.Vector3(...(portrait ? CAMERA.portraitStart : CAMERA.start));
+    home = new THREE.Vector3(...(portrait ? CAMERA.portraitHome : CAMERA.home));
+  }
 
   function setPhase(nextPhase, now) {
     phase = nextPhase;
@@ -79,6 +91,7 @@ export function createCinematicDirector(camera, {
   return {
     start(now = performance.now()) {
       lastMoment = "";
+      configureTourPath();
       setPhase("tour", now);
     },
     skipTour(now = performance.now()) {

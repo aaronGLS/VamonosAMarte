@@ -18,3 +18,10 @@ export function createRenderer(container) {
 
   return renderer;
 }
+
+export async function warmUpRenderer(renderer, scene, camera) {
+  await renderer.compileAsync(scene, camera);
+  renderer.render(scene, camera);
+  renderer.getContext().finish();
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+}
