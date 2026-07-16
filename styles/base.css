@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "Celestial Serif";
+  src: local("Bodoni 72"), local("Bodoni MT"), local("Didot");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --ink: #f8f2ff;
+  --muted: #c6bdd9;
+  --gold: #f1d49a;
+  --violet: #aa88ff;
+  --deep-space: #05050e;
+  --glass: rgba(16, 12, 35, 0.46);
+  --line: rgba(235, 220, 255, 0.16);
+  --safe-top: max(22px, env(safe-area-inset-top));
+  --safe-bottom: max(22px, env(safe-area-inset-bottom));
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--deep-space);
+}
+
+body {
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 0;
+  filter: drop-shadow(0 0 8px rgba(241, 212, 154, 0.9));
+}
+
+.experience,
+.scene {
+  position: fixed;
+  inset: 0;
+}
+
+.scene {
+  background:
+    radial-gradient(circle at 50% 48%, rgba(75, 49, 130, 0.2), transparent 32%),
+    #05050e;
+  touch-action: none;
+}
+
+.scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.scene canvas:active {
+  cursor: grabbing;
+}
+
+.scene canvas.is-pointing {
+  cursor: pointer;
+}
+
+.cinematic-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 48%, rgba(0, 0, 8, 0.28) 78%, rgba(0, 0, 5, 0.72) 120%),
+    repeating-radial-gradient(circle at center, transparent 0 3px, rgba(255, 255, 255, 0.008) 4px);
+  mix-blend-mode: normal;
+}
+
+.no-script {
+  position: fixed;
+  z-index: 20;
+  inset: auto 20px 20px;
+  margin: 0;
+  padding: 14px;
+  border: 0;
+  background: #151126;
+  text-align: center;
+}
+
+::selection {
+  color: #120d20;
+  background: var(--gold);
+}

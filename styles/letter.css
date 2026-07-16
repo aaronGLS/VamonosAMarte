@@ -1,0 +1,109 @@
+.secret-letter {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  color: var(--ink);
+  background: radial-gradient(circle at 50% 45%, rgba(39, 25, 70, 0.72), rgba(5, 4, 14, 0.92) 64%);
+  opacity: 0;
+  backdrop-filter: blur(18px);
+  transition: opacity 500ms ease, display 500ms allow-discrete, overlay 500ms allow-discrete;
+}
+
+.secret-letter[open] {
+  display: grid;
+  opacity: 1;
+  place-items: center;
+}
+
+.secret-letter::backdrop {
+  background: rgba(2, 2, 9, 0.68);
+  backdrop-filter: blur(9px);
+}
+
+.letter {
+  position: relative;
+  width: min(720px, calc(100vw - 36px));
+  max-height: min(82vh, 760px);
+  padding: clamp(42px, 7vw, 86px) clamp(24px, 8vw, 92px);
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(205, 173, 255, 0.12), transparent 45%),
+    linear-gradient(145deg, rgba(39, 26, 68, 0.5), rgba(14, 10, 30, 0.3));
+  box-shadow: 0 35px 110px rgba(0, 0, 0, 0.52), 0 0 80px rgba(122, 82, 204, 0.12);
+  text-align: center;
+}
+
+.letter__close {
+  position: absolute;
+  top: 22px;
+  right: 25px;
+  padding: 5px;
+  border: 0;
+  color: rgba(239, 230, 250, 0.56);
+  background: transparent;
+  font-family: Georgia, serif;
+  font-size: 1.9rem;
+  font-weight: 200;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+.letter__close:hover {
+  color: var(--gold);
+  transform: rotate(8deg) scale(1.08);
+}
+
+.letter__moon {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gold);
+  font-size: 2.4rem;
+  filter: drop-shadow(0 0 20px rgba(241, 212, 154, 0.58));
+}
+
+.letter__eyebrow {
+  margin: 0 0 18px;
+  color: var(--gold);
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.letter h2 {
+  margin: 0 0 30px;
+  font-family: "Celestial Serif", Georgia, serif;
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-shadow: 0 0 34px rgba(174, 139, 255, 0.2);
+}
+
+.letter__body {
+  display: grid;
+  gap: 16px;
+  color: rgba(238, 229, 247, 0.76);
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  line-height: 1.75;
+}
+
+.letter__body p,
+.letter__signature {
+  margin: 0;
+}
+
+.letter__signature {
+  margin-top: 31px;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 1.03rem;
+  font-style: italic;
+}

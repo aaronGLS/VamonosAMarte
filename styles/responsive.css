@@ -1,0 +1,112 @@
+@media (max-width: 680px) {
+  .intro {
+    padding: 24px 20px;
+  }
+
+  .intro h1 {
+    font-size: clamp(2.8rem, 15vw, 4.4rem);
+  }
+
+  .intro__eyebrow {
+    margin-bottom: 18px;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+  }
+
+  .intro__message {
+    margin: 23px auto 28px;
+    font-size: 0.94rem;
+  }
+
+  .intro__message br {
+    display: none;
+  }
+
+  .intro__orbit--outer {
+    width: 132vw;
+  }
+
+  .intro__orbit--inner {
+    width: 92vw;
+  }
+
+  .controls-hint {
+    right: 18px;
+    bottom: calc(var(--safe-bottom) + 2px);
+    left: auto;
+  }
+
+  .controls-hint p {
+    display: none;
+  }
+
+  .phrase-card {
+    bottom: calc(var(--safe-bottom) + 54px);
+    max-width: calc(100vw - 32px);
+  }
+
+  .hud__brand span:last-child {
+    display: none;
+  }
+
+  .discovery-progress {
+    top: 52px;
+    width: max-content;
+    max-width: 78vw;
+    font-size: 0.64rem;
+  }
+
+  .moon-whisper {
+    right: 20px;
+    left: 20px;
+    text-align: center;
+  }
+
+  .tour-guide {
+    bottom: calc(var(--safe-bottom) + 4px);
+  }
+
+  .letter {
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 34px);
+    padding: 58px 24px 46px;
+  }
+
+  .letter__close {
+    top: 17px;
+    right: 18px;
+  }
+
+  .letter h2 {
+    font-size: clamp(2.15rem, 12vw, 3.2rem);
+  }
+
+  .finale-message {
+    top: 54%;
+  }
+
+  .finale-message h2 {
+    font-size: clamp(2.55rem, 15vw, 4.3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #e6dff0;
+    --line: rgba(255, 255, 255, 0.4);
+  }
+
+  .cinematic-layer {
+    display: none;
+  }
+}

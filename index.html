@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#070713">
+    <meta name="description" content="Un pequeño universo creado para alguien muy especial.">
+    <title>Nuestro universo</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="experience" class="experience" aria-label="Experiencia romántica tridimensional">
+      <div id="scene" class="scene" role="img" aria-label="Un planeta parecido a Saturno rodeado de frases románticas"></div>
+      <div class="cinematic-layer" aria-hidden="true"></div>
+
+      <section id="intro" class="intro" aria-labelledby="intro-title">
+        <div class="intro__orbit intro__orbit--outer" aria-hidden="true"></div>
+        <div class="intro__orbit intro__orbit--inner" aria-hidden="true"></div>
+        <div class="intro__content">
+          <p class="intro__eyebrow">Un universo hecho para ti</p>
+          <h1 id="intro-title">Mi lugar favorito<br>siempre será contigo</h1>
+          <p class="intro__message">
+            Entre millones de estrellas, coincidimos tú y yo.<br>
+            Hoy quiero regalarte un rincón del universo.
+          </p>
+          <button id="start-button" class="start-button" type="button" disabled>
+            <span>Entrar a nuestro universo</span>
+            <span class="start-button__star" aria-hidden="true">✦</span>
+          </button>
+          <p id="loading-label" class="loading-label" role="status">Creando estrellas…</p>
+        </div>
+      </section>
+
+      <header id="hud" class="hud" aria-hidden="true">
+        <div class="hud__brand">
+          <span class="hud__star" aria-hidden="true">✦</span>
+          <span>Nuestro universo</span>
+        </div>
+        <p id="discovery-progress" class="discovery-progress" aria-live="polite">0 de 12 mensajes descubiertos</p>
+        <div class="hud__actions">
+          <button id="audio-toggle" class="icon-button audio-toggle" type="button" aria-label="Reproducir música" title="Reproducir música">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 18V5l10-2v13M9 9l10-2M6.5 21C4.57 21 3 19.88 3 18.5S4.57 16 6.5 16 10 17.12 10 18.5 8.43 21 6.5 21Zm10-2c-1.93 0-3.5-1.12-3.5-2.5s1.57-2.5 3.5-2.5 3.5 1.12 3.5 2.5-1.57 2.5-3.5 2.5Z"/>
+            </svg>
+          </button>
+          <button id="reset-view" class="icon-button" type="button" aria-label="Volver a la vista inicial" title="Volver a la vista inicial">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12a8 8 0 1 0 2.34-5.66L4 8.68M4 4v4.68h4.68"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <aside id="tour-guide" class="tour-guide" aria-live="polite" aria-hidden="true">
+        <span class="tour-guide__star" aria-hidden="true">✦</span>
+        <p id="tour-moment">Acercándonos a nuestro pequeño universo</p>
+        <button id="skip-tour" type="button">Saltar recorrido</button>
+      </aside>
+
+      <aside id="phrase-card" class="phrase-card" aria-live="polite" aria-hidden="true">
+        <span class="phrase-card__spark" aria-hidden="true">✦</span>
+        <p id="selected-phrase"></p>
+      </aside>
+
+      <div id="controls-hint" class="controls-hint" aria-hidden="true">
+        <span class="controls-hint__gesture" aria-hidden="true"></span>
+        <p><strong>Explora el universo</strong><span>Arrastra para girar · Pellizca para acercarte</span></p>
+      </div>
+
+      <p id="moon-whisper" class="moon-whisper" aria-hidden="true">
+        <span aria-hidden="true">☾</span> Una de las lunas guarda algo para ti
+      </p>
+
+      <section id="finale-message" class="finale-message" aria-live="polite" aria-hidden="true">
+        <p>Doce mensajes, una sola certeza</p>
+        <h2>Te quiero en todos mis universos</h2>
+        <span aria-hidden="true">✦</span>
+      </section>
+
+      <dialog id="secret-letter" class="secret-letter" aria-labelledby="letter-title">
+        <article class="letter">
+          <button id="close-letter" class="letter__close" type="button" aria-label="Cerrar carta">×</button>
+          <span class="letter__moon" aria-hidden="true">☾</span>
+          <p id="letter-eyebrow" class="letter__eyebrow"></p>
+          <h2 id="letter-title"></h2>
+          <div id="letter-body" class="letter__body"></div>
+          <p id="letter-signature" class="letter__signature"></p>
+        </article>
+      </dialog>
+
+      <audio id="ambient-audio" loop preload="metadata">
+        <source src="./assets/audio/musica.mp3" type="audio/mpeg">
+      </audio>
+
+      <noscript>
+        <p class="no-script">Activa JavaScript para poder visitar este universo.</p>
+      </noscript>
+    </main>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

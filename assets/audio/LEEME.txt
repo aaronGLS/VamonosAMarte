@@ -1,0 +1,5 @@
+Coloca en esta carpeta tu cancion y llamala exactamente:
+
+musica.mp3
+
+La ruta final debe ser: assets/audio/musica.mp3
