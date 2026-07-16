@@ -133,7 +133,8 @@ try {
     onMoon: openSecretLetter,
   });
 
-  function animate(now = performance.now()) {
+  function animate() {
+    const now = performance.now();
     const delta = Math.min(clock.getDelta(), 0.05);
     const elapsed = clock.elapsedTime;
     director.update(now);

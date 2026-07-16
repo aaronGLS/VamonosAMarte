@@ -50,7 +50,7 @@ export function createCinematicDirector(camera, {
 
   function updateTour(now) {
     const duration = reducedMotion ? 700 : EXPERIENCE.tourDuration;
-    const progress = Math.min((now - phaseStartedAt) / duration, 1);
+    const progress = THREE.MathUtils.clamp((now - phaseStartedAt) / duration, 0, 1);
     const eased = easeInOut(progress);
 
     if (reducedMotion) {
@@ -78,7 +78,7 @@ export function createCinematicDirector(camera, {
 
   function updateFinale(now) {
     const duration = reducedMotion ? 700 : EXPERIENCE.finaleDuration;
-    const progress = Math.min((now - phaseStartedAt) / duration, 1);
+    const progress = THREE.MathUtils.clamp((now - phaseStartedAt) / duration, 0, 1);
     camera.position.lerpVectors(finaleOrigin, finaleCamera, easeInOut(Math.min(progress * 1.5, 1)));
     camera.lookAt(center);
 
